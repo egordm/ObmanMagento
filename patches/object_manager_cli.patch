@@ -1,0 +1,27 @@
+diff --git a/vendor/magento/framework/Console/Cli.php b/vendor/magento/framework/Console/Cli.php
+index fac588f..fe7a43e 100644
+--- a/vendor/magento/framework/Console/Cli.php
++++ b/vendor/magento/framework/Console/Cli.php
+@@ -160,21 +160,21 @@ class Cli extends Console\Application
+         $params = (new ComplexParameter(self::INPUT_KEY_BOOTSTRAP))->mergeFromArgv($_SERVER, $_SERVER);
+         $params[Bootstrap::PARAM_REQUIRE_MAINTENANCE] = null;
+         $params = $this->documentRootResolver($params);
+         $requestParams = $this->serviceManager->get('magento-init-params');
+         $appBootstrapKey = Bootstrap::INIT_PARAM_FILESYSTEM_DIR_PATHS;
+ 
+         if (isset($requestParams[$appBootstrapKey]) && !isset($params[$appBootstrapKey])) {
+             $params[$appBootstrapKey] = $requestParams[$appBootstrapKey];
+         }
+ 
+-        $this->objectManager = Bootstrap::create(BP, $params)->getObjectManager();
++        $this->objectManager = \EgorDm\Obman\Overwrites\Bootstrap::create(BP, $params)->getObjectManager();
+ 
+         /** @var ObjectManagerProvider $omProvider */
+         $omProvider = $this->serviceManager->get(ObjectManagerProvider::class);
+         $omProvider->setObjectManager($this->objectManager);
+     }
+ 
+     /**
+      * Checks whether compiler is being prepared.
+      *
+      * @return void
