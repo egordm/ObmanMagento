@@ -3,10 +3,22 @@
 
 namespace EgorDm\Obman\Console\Command;
 
+use EgorDm\Obman\Wrappers\ObmanFactory;
+use EgorDm\Obman\Wrappers\ObmanObjectManager;
 use Magento\Framework\ObjectManager\ConfigInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
+class Test {
+
+    /**
+     * Test constructor.
+     */
+    public function __construct(array $ello = [])
+    {
+    }
+}
 
 class ObmanTest extends Command
 {

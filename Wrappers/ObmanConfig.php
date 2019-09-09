@@ -14,8 +14,8 @@ class ObmanConfig
     implements \Magento\Framework\ObjectManager\ConfigInterface,
                \Magento\Framework\Interception\ObjectManager\ConfigInterface
 {
-    /** @var \EgorDm\Obman\Config */
-    private $cppConfig;
+    /** @var \EgorDm\Obman\Cpp\Config */
+    private $cppInstance;
 
     /**
      * @var InterceptableValidator
@@ -40,7 +40,7 @@ class ObmanConfig
     ) {
 
         $this->interceptableValidator = $interceptableValidator ?: new InterceptableValidator();
-        $this->cppConfig = new \EgorDm\Obman\Config();
+        $this->cppInstance = new \EgorDm\Obman\Cpp\Config();
         if($relations) {
             $this->setRelations($relations);
         }
@@ -55,7 +55,7 @@ class ObmanConfig
      */
     public function setRelations(RelationsInterface $relations)
     {
-        $this->cppConfig->setRelations($relations);
+        $this->cppInstance->setRelations($relations);
     }
 
     /**
@@ -67,7 +67,7 @@ class ObmanConfig
      */
     public function setCache(ConfigCacheInterface $cache)
     {
-        $this->cppConfig->setCache($cache);
+        $this->cppInstance->setCache($cache);
     }
 
     /**
@@ -78,7 +78,7 @@ class ObmanConfig
      */
     public function getArguments($type)
     {
-        return $this->cppConfig->getArguments($type);
+        return $this->cppInstance->getArguments($type);
     }
 
     /**
@@ -89,7 +89,7 @@ class ObmanConfig
      */
     public function isShared($type)
     {
-        return $this->cppConfig->isShared($type);
+        return $this->cppInstance->isShared($type);
     }
 
     /**
@@ -100,7 +100,7 @@ class ObmanConfig
      */
     public function getInstanceType($instanceName)
     {
-        $type = $this->cppConfig->getInstanceType($instanceName);
+        $type = $this->cppInstance->getInstanceType($instanceName);
         if ($this->interceptionConfig && $this->interceptionConfig->hasPlugins($instanceName)
             && $this->interceptableValidator->validate($instanceName)
         ) {
@@ -118,7 +118,7 @@ class ObmanConfig
      */
     public function getPreference($type)
     {
-        return $this->cppConfig->getPreference($type);
+        return $this->cppInstance->getPreference($type);
     }
 
     /**
@@ -128,7 +128,7 @@ class ObmanConfig
      */
     public function getVirtualTypes()
     {
-        return $this->cppConfig->getVirtualTypes();
+        return $this->cppInstance->getVirtualTypes();
     }
 
     /**
@@ -139,7 +139,7 @@ class ObmanConfig
      */
     public function extend(array $configuration)
     {
-        $this->cppConfig->extend($configuration);
+        $this->cppInstance->extend($configuration);
     }
 
     /**
@@ -149,7 +149,7 @@ class ObmanConfig
      */
     public function getPreferences()
     {
-        return $this->cppConfig->getPreferences();
+        return $this->cppInstance->getPreferences();
     }
 
     /**
@@ -171,6 +171,14 @@ class ObmanConfig
      */
     public function getOriginalInstanceType($instanceName)
     {
-        return $this->cppConfig->getInstanceType($instanceName);
+        return $this->cppInstance->getInstanceType($instanceName);
+    }
+
+    /**
+     * @return \EgorDm\Obman\Cpp\Config
+     */
+    public function getCppInstance(): \EgorDm\Obman\Cpp\Config
+    {
+        return $this->cppInstance;
     }
 }
