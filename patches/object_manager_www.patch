@@ -1,0 +1,20 @@
+diff --git a/index.php b/index.php
+index 9ac7f6f..731a3aa 100644
+--- a/index.php
++++ b/index.php
+@@ -26,14 +26,14 @@ try {
+     <div style="margin:0 0 25px 0; border-bottom:1px solid #ccc;">
+         <h3 style="margin:0;font-size:1.7em;font-weight:normal;text-transform:none;text-align:left;color:#2f2f2f;">
+         Autoload error</h3>
+     </div>
+     <p>{$e->getMessage()}</p>
+ </div>
+ HTML;
+     exit(1);
+ }
+ 
+-$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
++$bootstrap = \EgorDm\Obman\Overwrites\Bootstrap::create(BP, $_SERVER);
+ /** @var \Magento\Framework\App\Http $app */
+ $app = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
+ $bootstrap->run($app);
