@@ -71,4 +71,14 @@ class ObmanObjectManager implements \Magento\Framework\ObjectManagerInterface
     {
         return $this->cppInstance;
     }
+
+    /**
+     * @param string $type
+     * @param $object
+     */
+    public function addSharedInstance($type, $object)
+    {
+        $this->cppInstance->addSharedInstance($type, $object);
+
+    }
 }
